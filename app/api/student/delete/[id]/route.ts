@@ -3,16 +3,16 @@ import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
-export async function GET(
+export async function DELETE(
   request: Request,
   { params }: { params: { id: number } }
 ) {
   const { id } = params;
-
-  const student = await prisma.student.findUnique({
+  // delete student from db
+  const student = await prisma.student.delete({
     where: {
       id: Number(id),
     },
   });
-  return NextResponse.json(student, { status: 200 });
+  return NextResponse.json("Deleted", { status: 200 });
 }

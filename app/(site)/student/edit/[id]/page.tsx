@@ -12,10 +12,17 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import EditForm from "@/components/EditForm";
 
 const prisma = new PrismaClient();
-const StudentPage = async () => {
+const StudentPage = async ({ params }: { params: { id: string } }) => {
+  const { id } = params;
   const students = await prisma.student.findMany();
+  const student = await prisma.student.findUnique({
+    where: {
+      id: Number(id),
+    },
+  });
 
   return (
     <div className="max-w-5xl mx-auto py-8">
@@ -23,7 +30,7 @@ const StudentPage = async () => {
 
       <div className="w-full flex gap-6">
         <div className="w-2/6 shadow-md p-4 flex justify-center">
-          <AddForm />
+          <EditForm student={student} />
         </div>
         <div className="w-4/6 shadow-md p-4 flex justify-center">
           <Table>

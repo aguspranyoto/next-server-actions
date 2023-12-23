@@ -11,12 +11,12 @@ const StudentDetail = async ({ params }: { params: { id: number } }) => {
 
   return (
     <div>
-      <ul key={student.id}>
-        <li>{student.name}</li>
-        <li>{student.nim}</li>
-        <li>{student.email}</li>
-        <li>{student.age}</li>
-        <li>{student.address}</li>
+      <ul key={student?.id}>
+        <li>{student?.name}</li>
+        <li>{student?.nim}</li>
+        <li>{student?.email}</li>
+        <li>{student?.age}</li>
+        <li>{student?.address}</li>
       </ul>
     </div>
   );

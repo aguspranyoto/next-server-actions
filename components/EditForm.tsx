@@ -39,24 +39,36 @@ const FormSchema = z.object({
   }),
 });
 
-const AddForm = () => {
+interface StudentProps {
+  student: Student;
+}
+interface Student {
+  id: number;
+  name: string;
+  nim: string;
+  email: string;
+  age: number;
+  address: string;
+}
+
+const EditForm: FC<StudentProps> = ({ student }) => {
   const router = useRouter();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      name: "",
-      nim: "",
-      email: "",
-      age: "",
-      address: "",
+      name: student.name,
+      nim: student.nim,
+      email: student.email,
+      age: student.age.toString(),
+      address: student.address,
     },
   });
 
   const onSubmit = async (values: z.infer<typeof FormSchema>) => {
     // Convert age to a number
     const age = parseInt(values.age, 10);
-    const response = await fetch("/api/student", {
-      method: "POST",
+    const response = await fetch(`/api/student/edit/${student.id}`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
@@ -160,4 +172,4 @@ const AddForm = () => {
   );
 };
 
-export default AddForm;
+export default EditForm;
