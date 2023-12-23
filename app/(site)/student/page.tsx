@@ -12,6 +12,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import ButtonDelete from "@/components/ButtonDelete";
 
 const prisma = new PrismaClient();
 const StudentPage = async () => {
@@ -48,6 +49,7 @@ const StudentPage = async () => {
                   <TableCell className="space-x-2">
                     <Link href={`/student/${student?.id}`}>show</Link>
                     <Link href={`/student/edit/${student?.id}`}>edit</Link>
+                    <ButtonDelete id={student?.id} />
                   </TableCell>
                 </TableRow>
               ))}

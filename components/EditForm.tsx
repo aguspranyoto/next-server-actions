@@ -98,6 +98,7 @@ const EditForm: FC<StudentProps> = ({ student }) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
+        <h1 className="text-2xl font-bold">Edit Student</h1>
         <FormField
           control={form.control}
           name="name"
